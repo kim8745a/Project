@@ -25,7 +25,7 @@ import com.terrier.service.GpsToAddress;
 public class Device_Controller {
 	@Inject
 	D_mgt_Service d_mgt_service;
-	
+	//test11
 	@Inject
 	GpsToAddress gps;
 	
