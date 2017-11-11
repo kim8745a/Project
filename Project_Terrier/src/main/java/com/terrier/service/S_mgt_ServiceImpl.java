@@ -11,6 +11,8 @@ import com.terrier.domain.Dep_ctl_on_count_VO;
 import com.terrier.domain.Dep_ctl_status_VO;
 import com.terrier.domain.S_mgt_date_con_count_VO;
 import com.terrier.domain.S_mgt_dep_date_con_count_VO;
+import com.terrier.domain.S_mgt_emp_date_con_count_VO;
+import com.terrier.domain.S_mgt_fi_count_VO;
 import com.terrier.persistence.S_mgt_DAO;
 
 @Service
@@ -51,6 +53,18 @@ public class S_mgt_ServiceImpl implements S_mgt_Service {
 	public Control_count_VO dep_date_conunt(S_mgt_dep_date_con_count_VO vo) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.dep_date_conunt(vo);
+	}
+
+	@Override
+	public Control_count_VO emp_date_conunt(S_mgt_emp_date_con_count_VO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.emp_date_conunt(vo);
+	}
+
+	@Override
+	public int fi_total(S_mgt_fi_count_VO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.fi_total(vo);
 	}
 
 }

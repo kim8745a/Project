@@ -34,17 +34,11 @@
 					</div>
 					
 					<div class="panel-body" id="pdf_div1" style="margin-bottom:5px;">			
-						<div class="col-md-6">
+						<div class="col-md-8">
 							<div id=chart_div1 style="width: 100%; height: 300px;"></div>
 						</div>
 						
 						<div class="col-md-4">
-							<div id=chart_div2 style="width: 100%; height: 300px;"></div>
-						</div>
-
-						
-
-						<div class="col-md-2">
 							<table class="table table-bordered"style="width: 100%; height: 300px;">
 							    <thead>
 							      <tr>
@@ -128,7 +122,7 @@
 	// Set a callback to run when the Google Visualization API is loaded.
 
 	google.charts.setOnLoadCallback(drawChart1);
-	google.charts.setOnLoadCallback(drawChart2);
+/* 	google.charts.setOnLoadCallback(drawChart2); */
 	google.charts.setOnLoadCallback(drawChart3);
 	
 	$("#load_dep_ctl").load("c_measurement_dep_mgt?department=인사");
@@ -155,7 +149,7 @@
 
     }
 	/* 파이그래프 */
-	function drawChart2() {
+	/* function drawChart2() {
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'control');
@@ -181,7 +175,7 @@
         var chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
         chart.draw(data, options);
         
-	}
+	} */
 	
 
 	/* 컬럼그래프 */
