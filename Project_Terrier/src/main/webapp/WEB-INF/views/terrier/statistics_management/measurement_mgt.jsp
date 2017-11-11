@@ -438,7 +438,7 @@ $("#serach2").on('click',function(){ //on에대한 정보만 입력값 날짜,�
 			{
 				Obj_off=data;
 			}
-		});/*ON을 위한 ajaxt*/
+		});
 		
 	
 	var nowdate="${now}";
