@@ -19,11 +19,9 @@ public class User_DAOImpl implements User_DAO {
 	@Inject
 	SqlSession sqlSession;
 	
-	
 	@Override
-	public User_VO login(User_DTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".login",dto);
+	public User_VO login(String username) {
+		return sqlSession.selectOne(namespace+".login", username);
 	}
 
 }

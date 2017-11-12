@@ -6,6 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="login_Mapper">
 	
 	<select id="login" resultType="User_VO">
-		SELECT * FROM web_admin WHERE id=#{id} and pw=#{pw}
+		SELECT * FROM web_admin WHERE id=#{id}
 	</select>
 </mapper>

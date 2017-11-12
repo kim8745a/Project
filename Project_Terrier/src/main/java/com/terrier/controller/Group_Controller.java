@@ -3,6 +3,7 @@ package com.terrier.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,10 @@ public class Group_Controller {
 	G_mgt_Service g_mgt_service;
 	
 	@RequestMapping(value="group_management/g_mgt",method=RequestMethod.GET) //그룹관리-그룹관리 
-	public void g_mgtGET(Model model,HttpSession session) throws Exception
+	public void g_mgtGET(Model model,HttpServletRequest request) throws Exception
 	{
-		User_VO user_vo = (User_VO)session.getAttribute("user_info");//접속한사람의 ID가 오너id가 저장될것.
-		String id = user_vo.getId();
+		// 스프링 시큐리티 사용으로 HttpSession -> request.getSession으로 변경.
+		String id = request.getSession().getAttribute("id").toString();//접속한사람의 ID가 오너id가 저장될것.
 		List<GroupList_VO> grouplist_vo;
 		grouplist_vo = g_mgt_service.group_list(id);
 		model.addAttribute("list", grouplist_vo);
@@ -48,10 +49,10 @@ public class Group_Controller {
 	
 	
 	@RequestMapping(value="group_management/g_Create",method=RequestMethod.GET)
-	public void g_Create(Model model,HttpSession session) throws Exception
+	public void g_Create(Model model, HttpServletRequest request) throws Exception
 	{
-		User_VO user_vo = (User_VO)session.getAttribute("user_info");
-		String id = user_vo.getId();
+		// 스프링 시큐리티 사용으로 HttpSession -> request.getSession으로 변경.
+		String id = request.getSession().getAttribute("id").toString();
 		List<GroupList_VO> grouplist_vo;
 		grouplist_vo = g_mgt_service.group_list(id);
 		model.addAttribute("list", grouplist_vo);

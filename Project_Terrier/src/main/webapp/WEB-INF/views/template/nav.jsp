@@ -37,11 +37,12 @@
 					<li id="control"><a href="/terrier/statistics_management/c_measurement_mgt">실시간 사용률 통계</a></li>
 					<li><a href="/terrier/statistics_management/measurement_mgt">날짜별 사용률 통계</a></li>					
 				</ul>
-			<!-- <li style="border-bottom: 0px"><a data-toggle="collapse" data-target="#sub_account" style="cursor:pointer;"><span class="glyphicon glyphicon-user" style="font-size:20px;"></span>&nbsp;&nbsp;계정 관리</a>
+			<li style="border-bottom: 0px"><a data-toggle="collapse" data-target="#sub_account" style="cursor:pointer;"><span class="glyphicon glyphicon-user" style="font-size:20px;"></span>&nbsp;&nbsp;계정 관리</a>
 				<ul class="collapse nav nav-pills nav-stacked" id="sub_account">
-					<li><a href="#">전체 계정 리스트</a></li>
-					<li><a href="#">계정 추가</a></li>
-				</ul> -->
+					<li><a href="#">계정 감사</a></li>
+					<li><a href="#">보안 관리</a></li>
+					<li><a href="#">권한 관리</a></li>
+			</ul> 
 				
 		</ul>	
 </div>

@@ -46,21 +46,6 @@
     	만약 똑같은 Type의 두개의 bean을 쓸 경우 각 bean에 이름을 달아서 사용할 수 있다. 
     	<beans:qualifier value="D_mgt_socketHandler"></beans:qualifier>
     -->
-
-	<!-- Session interceptor bean등록-->
-	<beans:bean id="SessionInterceptor" class="com.terrier.interceptor.Session_Interceptor">
-	</beans:bean>
-	<!--interceptor 맵핑 등록-->
-		<interceptors>
-			<interceptor>
-				<mapping path="/terrier/*"/><!--모든 페이지에서 항상 세션검사해야되-->
-				<mapping path="/terrier/*/*"/>
-				<mapping path="/terrier/*/*/*"/>
-				<beans:ref bean="SessionInterceptor"/>
-			</interceptor>
-		</interceptors>	
-			
-	
 		
 	<!--tiles3기본Main템플릿-->
 	<beans:bean id="tilesviewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>

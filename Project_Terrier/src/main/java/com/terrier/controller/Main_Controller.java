@@ -10,13 +10,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("terrier/*")
 public class Main_Controller 
 {
-	@RequestMapping("logout")//main->로그아웃 눌렀을때
-	public String logout(HttpSession session,RedirectAttributes rttr)
-	{
-		session.invalidate();// 세션
-		rttr.addFlashAttribute("msg","logout");
-		return "redirect:/user/login";
-	}
+	
+//	@RequestMapping("logout")//main->로그아웃 눌렀을때
+//	public String logout(HttpSession session,RedirectAttributes rttr)
+//	{
+//		session.invalidate();// 세션
+//		rttr.addFlashAttribute("msg","logout");
+//		return "redirect:/user/login";
+//	}
 
 	@RequestMapping("main")//로그인 ->main
 	public void main(Model model)
