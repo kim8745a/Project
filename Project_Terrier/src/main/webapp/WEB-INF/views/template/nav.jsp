@@ -21,8 +21,8 @@
 			<li><a data-toggle="collapse" data-target="#loss_management" style="cursor:pointer;"><span class="glyphicon glyphicon-erase" style="font-size:20px;"></span>&nbsp;&nbsp;분실 관리</a>
 				<ul class="collapse nav nav-pills nav-stacked" id="loss_management">
 					<li id="lr_list"><a href="/terrier/loss_management/lr_list">분실 요청 리스트</a></li>
-					<li id="lf_list"><a href="/terrier/loss_management/lf_list">로그인 실패 리스트</a></li>
 					<li id="l_list"><a href="/terrier/loss_management/l_list">분실 처리</a></li>
+					<li id="lf_list"><a href="/terrier/loss_management/lf_list">로그인 실패 리스트</a></li>
 				</ul>
 				
 			<li><a data-toggle="collapse" data-target="#request_management" style="cursor:pointer;"><span class="glyphicon glyphicon-send" style="font-size:20px;"></span>&nbsp;&nbsp;요청 관리</a>
@@ -37,9 +37,9 @@
 					<li id="control"><a href="/terrier/statistics_management/c_measurement_mgt">실시간 사용률 통계</a></li>
 					<li><a href="/terrier/statistics_management/measurement_mgt">날짜별 사용률 통계</a></li>					
 				</ul>
-			<li style="border-bottom: 0px"><a data-toggle="collapse" data-target="#sub_account" style="cursor:pointer;"><span class="glyphicon glyphicon-user" style="font-size:20px;"></span>&nbsp;&nbsp;계정 관리</a>
-				<ul class="collapse nav nav-pills nav-stacked" id="sub_account">
-					<li><a href="#">계정 감사</a></li>
+			<li style="border-bottom: 0px"><a data-toggle="collapse" data-target="#account_management" style="cursor:pointer;"><span class="glyphicon glyphicon-user" style="font-size:20px;"></span>&nbsp;&nbsp;계정 관리</a>
+				<ul class="collapse nav nav-pills nav-stacked" id="account_management">
+					<li id="audit_list"><a href="/terrier/account_management/audit_list">계정 감사</a></li>
 					<li><a href="#">보안 관리</a></li>
 					<li><a href="#">권한 관리</a></li>
 			</ul> 

@@ -26,20 +26,20 @@ public class Group_Data_Controller {
 	G_mgt_Service g_mgt_service;
 	
 	@RequestMapping("group_management/group_Check")
-	public String group_Duplicate_check(@RequestParam String group_name,HttpSession session) throws Exception
+	public String group_Duplicate_check(@RequestParam String group_name,HttpServletRequest request) throws Exception
 	{
-		User_VO user_vo = (User_VO)session.getAttribute("user_info");
-		String id = user_vo.getId();		
+		// 스프링 시큐리티 사용으로 HttpSession -> request.getSession으로 변경.
+		String id = request.getSession().getAttribute("id").toString();
 		G_Owner_VO vo = new G_Owner_VO();
 		vo.setGroup_name(group_name);
 		vo.setId(id);		
 		return String.valueOf(g_mgt_service.group_check(vo));
 	}
 	@RequestMapping("group_management/group_Delete")
-	public void	group_Delete(@RequestParam String group_name,HttpSession session) throws Exception
+	public void	group_Delete(@RequestParam String group_name,HttpServletRequest request) throws Exception
 	{
-		User_VO user_vo = (User_VO)session.getAttribute("user_info");
-		String id = user_vo.getId();
+		// 스프링 시큐리티 사용으로 HttpSession -> request.getSession으로 변경.
+		String id = request.getSession().getAttribute("id").toString();
 		
 		G_Owner_VO vo = new G_Owner_VO();
 		vo.setGroup_name(group_name);
@@ -52,20 +52,20 @@ public class Group_Data_Controller {
 	{	
 		List<Group_VO> group =new ArrayList<Group_VO>();
         int size=emp.length;//그룹팝업에서 선택한 사원수
-        HttpSession session=request.getSession();
-        User_VO vo=(User_VO) session.getAttribute("user_info");
+        // 스프링 시큐리티 사용으로 HttpSession -> request.getSession으로 변경.
+     	String id = request.getSession().getAttribute("id").toString();
 
         for(int i=0;i<size;i++)
         {
         	Group_VO gvo=new Group_VO();
         	gvo.setEmployee_num(emp[i]);//사원번호
         	gvo.setGroup_name(g_name);//그룹명
-        	gvo.setGroup_owner(vo.getId());//오너아이디
+        	gvo.setGroup_owner(id);//오너아이디
         	group.add(gvo);
         }     
         G_Owner_VO owner_vo = new G_Owner_VO();
         owner_vo.setGroup_name(g_name);
-        owner_vo.setId(vo.getId());		
+        owner_vo.setId(id);		
 		g_mgt_service.group_delete(owner_vo);	
         g_mgt_service.group_update(group);
         

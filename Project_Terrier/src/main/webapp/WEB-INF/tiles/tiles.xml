@@ -40,6 +40,8 @@
 	<definition name="terrier/statistics_management/c_measurement_dep_mgt" template="/WEB-INF/views/terrier/statistics_management/c_measurement_dep_mgt.jsp">
 		<put-attribute name="content" value=""/>
 	</definition>
+	
+	
 	<!-- 타일즈 예외처리end -->
 	
 	<definition name="terrier/*" extends="layout"><!--*/*는 컨트롤러가return하는값에 layout을 상속시킨다.또한 /terrier/test는 컨트롤러입력값이된다.-->

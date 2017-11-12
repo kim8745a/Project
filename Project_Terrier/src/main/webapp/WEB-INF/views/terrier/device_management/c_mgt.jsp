@@ -31,6 +31,18 @@
 <title>단말제어</title>
 
 <style>
+.apply_butt{
+	margin:0px;
+	width:150px;
+	background-color: #ffffff;
+	border:1px solid #dddddd;
+	color:#333333;
+}
+	
+.apply_butt:hover{
+	background-color: #e6e6e6;
+	border:1px solid #adadad;
+}
 
 .emp_info tr td {
 	font:12px Arial, Helvetica,sans-serif;
@@ -123,6 +135,7 @@
             				<tr>
               					<th>이름</th>
               					<th>사이즈</th>
+              					<th>변조 여부</th>
               					<th>버전</th>
               				</tr>
           				</thead>
@@ -130,9 +143,10 @@
           				<tbody style="height: 90px;">
             				<c:forEach items="${applist}" var="app">
 	            				<tr>
-	              					<td width="100"style="word-wrap:break-word;word-break:break-all;">${app.name}</td>
-	              					<td width="110"style="word-wrap:break-word;word-break:break-all;">${app.size}MB</td>
-	              					<td width="100"style="word-wrap:break-word;word-break:break-all;">${app.version}</td>
+	              					<td width="100" style="word-wrap:break-word;word-break:break-all;">${app.name}</td>
+	              					<td width="110" style="word-wrap:break-word;word-break:break-all;">${app.size}</td>
+	              					<td width="110" style="word-wrap:break-word;word-break:break-all;">${app.name}</td>
+	              					<td width="100" style="word-wrap:break-word;word-break:break-all;">${app.version}</td>
 	              				</tr>
               				</c:forEach>
               			</tbody>
@@ -250,34 +264,83 @@
 		</div>
 	</div>
 		
-	<div class="row"><!-- 전체로그[버튼] -->
+	<div class="row"><!-- 어플 -->
 		<div class="col-md-12"style="padding-left: 10px;padding-right:5px;">
 			<div class="panel panel-primary">
-	      		<div class="panel-heading" style="background-color: #3367d6;">전체 로그</div>
-	      		<div class="panel-body" style="padding: 0px; height:210px; overflow:auto;">
-	      			<table class="table table-hover table-striped table-rwd-name table-hidden" style="padding: 0px; margin: 0px; font-size: 12px">
-	      				<thead class="table-only-hide">
-            				<tr>
-              					<th style="width:30%">이름</th>
-              					<th style="width:50%">내용</th>
-              					<th style="width:20%">날짜</th>
-              				</tr>
-          				</thead>
-          				
-          				<tbody style="height: 175px;">
-          				<c:forEach items="${applog}" var="log">
-          					<tr>
-              					<td style="width:30%">${log.history}</td>
-              					<td style="width:50%">${log.type}</td>
-              					<td style="width:20%">${log.data_Time}</td>
-              				</tr>            		
-              			</c:forEach>		      				              				
-              			</tbody>
-              		</table>
+	      		<div class="panel-heading" style="background-color: #3367d6;">어플 로그</div>
+	      		<div class="panel-body" style="padding: 0px; height:355px; overflow:auto;">
+	      			<div class="dual-list list-left col-md-12" style="padding:0;margin:0;">
+			            <div class="well text-right" style="padding:0;margin:0;background-color:#fff">
+			                <div class="row">
+			                    <div class="col-md-12">
+			                        <div class="input-group">
+			                            <span class="input-group-addon glyphicon glyphicon-search"></span>
+			                            <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+			                        </div>
+			                    </div>
+			                </div>
+				                
+			                <div style="padding:0px;margin:0px;">
+				                <ul class="list-group" style="height: 300px;overflow-y: scroll;margin:0px;">
+				                	<c:forEach items="${applog}" var="log">
+					                	<li class="list-group-item">
+					                		<table style="padding: 0px; margin: 0px; font-size: 12px">
+						          				
+						          					<tr style="width: 100%;">
+						              					<td style="width:500px">${log.history}</td>
+						              					<td style="width:100px; margin-right: 300px;">${log.type}</td>
+						              					<td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${log.data_Time}</td>
+						              				</tr>            		
+						              				      				              				
+						              		</table>
+					              	</c:forEach>	
+				                </ul>
+			                </div>
+						</div>
+					</div>
 	      		</div>
 	    	</div>
 	    </div>
-	</div><!-- row-fluid -->
+	</div><!-- 어플로그 -->
+	
+	<div class="row"><!-- 어플 -->
+		<div class="col-md-12"style="padding-left: 10px;padding-right:5px;">
+			<div class="panel panel-primary">
+	      		<div class="panel-heading" style="background-color: #3367d6;">제어 로그</div>
+	      		<div class="panel-body" style="padding: 0px; height:355px; overflow:auto;">
+	      			<div class="dual-list list-left col-md-12" style="padding:0;margin:0;">
+			            <div class="well text-right" style="padding:0;margin:0;background-color:#fff">
+			                <div class="row">
+			                    <div class="col-md-12">
+			                        <div class="input-group">
+			                            <span class="input-group-addon glyphicon glyphicon-search"></span>
+			                            <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+			                        </div>
+			                    </div>
+			                </div>
+				                
+			                <div style="padding:0px;margin:0px;">
+				                <ul class="list-group" style="height: 300px;overflow-y: scroll;margin:0px;">
+				                	<c:forEach items="${conlog}" var="log">
+					                	<li class="list-group-item">
+					                		<table style="padding: 0px; margin: 0px; font-size: 12px">
+						          				
+						          					<tr style="width: 100%;">
+						              					<td style="width:500px">${log.type}</td>
+						              					<td style="width:100px; margin-right: 300px;">${log.history}</td>
+						              					<td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${log.data_Time}</td>
+						              				</tr>            		
+						              				      				              				
+						              		</table>
+					              	</c:forEach>	
+				                </ul>
+			                </div>
+						</div>
+					</div>
+	      		</div>
+	    	</div>
+	    </div>
+	</div><!-- 어플로그 -->
 
 </div><!-- 컨테이너 -->
 
@@ -531,6 +594,18 @@
     }
 	
 	
+    // 필터 부분
+    $('[name="SearchDualList"]').keyup(function (e) {
+        var code = e.keyCode || e.which;
+        if (code == '9') return;
+        if (code == '27') $(this).val(null);
+        var $rows = $(this).closest('.dual-list').find('.list-group li');
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+        $rows.show().filter(function () {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
 </script>
 </body>
 </html>

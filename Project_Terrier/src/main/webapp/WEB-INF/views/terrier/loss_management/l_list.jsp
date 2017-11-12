@@ -4,7 +4,7 @@
 <!-- 구글지도스크립트 스크랩-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1AyPhozLfzLjsoL2RTkE1VqSN5sww8pk"></script>
 
-<title>분실 관리</title>
+<title>분실 처리</title>
 
 <style>
 	.apply_butt{
@@ -241,16 +241,15 @@ function view_controll(e_num)
 	    		google.maps.event.addListener(marker, 'click', function() { 
 	    		infowindow.open(map, marker); 
 	    		});
-	    		
-	    		padding_height = $("#content").height()+30 - $('.nav_div').height();
-	    		$('.nav_div').css('min-height',$("#content").height()+30);
+				
 	        },
 		    error: function() {
 		    	alert("에러");
 		    }        
 		});
 		
-
+		padding_height = $("#content").height()+30 - $('.nav_div').height();
+		$('.nav_div').css('min-height', $("#content").height()+30);
 	}
 	else
 	{

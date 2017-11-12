@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.terrier.domain.C_mgt_AppList_VO;
 import com.terrier.domain.C_mgt_AppLog_VO;
+import com.terrier.domain.C_mgt_ControlLog_VO;
 import com.terrier.domain.C_mgt_Gps_VO;
 import com.terrier.domain.C_mgt_controller_VO;
 import com.terrier.domain.C_mgt_userinfo_VO;
@@ -63,6 +64,11 @@ public class D_mgt_DAOImpl implements D_mgt_DAO {
 	public C_mgt_Gps_VO gps(Location_emp_num_VO vo) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".user_gps",vo);
+	}
+
+	@Override
+	public List<C_mgt_ControlLog_VO> controllog(String emp_num) throws Exception {
+		return sqlSession.selectList(namespace+".user_conlog", emp_num);
 	}
 
 }

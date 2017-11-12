@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.terrier.domain.Audit_VO;
 import com.terrier.domain.Employee_VO;
 import com.terrier.domain.G_Owner_VO;
 import com.terrier.domain.G_mgt_log_VO;
 import com.terrier.domain.GroupList_VO;
 import com.terrier.domain.User_VO;
+import com.terrier.service.Audit_Service;
 import com.terrier.service.G_mgt_Service;
 
 //그룹관리 view컨트롤 전용
@@ -24,9 +26,11 @@ import com.terrier.service.G_mgt_Service;
 public class Group_Controller {
 	@Inject
 	G_mgt_Service g_mgt_service;
+	@Inject
+	Audit_Service service;
 	
 	@RequestMapping(value="group_management/g_mgt",method=RequestMethod.GET) //그룹관리-그룹관리 
-	public void g_mgtGET(Model model,HttpServletRequest request) throws Exception
+	public void g_mgtGET(Model model, HttpServletRequest request) throws Exception
 	{
 		// 스프링 시큐리티 사용으로 HttpSession -> request.getSession으로 변경.
 		String id = request.getSession().getAttribute("id").toString();//접속한사람의 ID가 오너id가 저장될것.

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.terrier.domain.C_mgt_AppList_VO;
 import com.terrier.domain.C_mgt_AppLog_VO;
+import com.terrier.domain.C_mgt_ControlLog_VO;
 import com.terrier.domain.C_mgt_Gps_VO;
 import com.terrier.domain.C_mgt_controller_VO;
 import com.terrier.domain.C_mgt_userinfo_VO;
@@ -18,4 +19,5 @@ public interface D_mgt_Service {
 	public List<C_mgt_AppList_VO> applist(String e_num)throws Exception;//c_mgt 어플리스크
 	public List<C_mgt_AppLog_VO> applog(String emp_num) throws Exception;//c_mgt 어플로그
 	public C_mgt_Gps_VO gps(Location_emp_num_VO vo)throws Exception;//사용자 위치정보
+	public List<C_mgt_ControlLog_VO> controllog(String e_num) throws Exception; //c_mgt 제어로그
 }

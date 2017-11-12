@@ -10,4 +10,151 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INNER JOIN device_management ON device_info.Id = device_management.Device_info_Id
 		WHERE employee_num=#{employee_num};
 	</select>
+	
+	<select id="l_emp_list" resultType="Employee_VO">
+		SELECT
+			employee_num, department, rank, telnum AS phone, user_info.name
+		FROM user_info
+		INNER JOIN device_info ON user_info.employee_num=device_info.User_info_employee_num
+		INNER JOIN device_management on device_info.Id=device_management.Device_info_Id
+		WHERE certification = 'nno';
+	</select>
+	
+	<select id="l_emp_search_list" resultType="Employee_VO">
+		SELECT
+			employee_num, department, rank, telnum AS phone, user_info.name
+		FROM user_info
+		INNER JOIN device_info ON user_info.employee_num=device_info.User_info_employee_num
+		INNER JOIN device_management on device_info.Id=device_management.Device_info_Id
+		WHERE certification = 'nno'
+		<if test='employee_num !=""'>
+			AND employee_num = #{employee_num}
+		</if>
+		<if test='department !="선택"'>
+			AND department = #{department}
+		</if>
+		
+		<if test='rank !="선택"'>
+			AND rank = #{rank}
+		</if>
+		
+		<if test='phone !=""'>
+			AND telnum = #{phone}
+		</if>
+		
+		<if test='name !=""'>
+			AND name = #{name}
+		</if>
+	</select>
+	
+	<select id="l_emp_dynamic" resultType="Employee_VO">
+		SELECT
+			employee_num, department, rank, telnum AS phone, user_info.name
+		FROM user_info
+		INNER JOIN device_info ON user_info.employee_num=device_info.User_info_employee_num
+		INNER JOIN device_management on device_info.Id=device_management.Device_info_Id
+		WHERE employee_num = #{employee_num}
+	</select>
+	
+	<select id="l_lf_date" resultType="String">
+		SELECT DATE_FORMAT(Date, '%Y-%c-%d') AS date
+		FROM device_history
+		INNER JOIN device_info ON device_info.Id = device_history.Device_info_Id
+		WHERE device_info.User_info_employee_num = #{employee_num}
+		ORDER BY idDevice_history DESC LIMIT 1;
+	</select>
+	
+	<select id="l_lf_log" resultType="L_mgt_lf_log_VO">
+		SELECT history, date
+		FROM device_history
+		INNER JOIN device_info ON device_info.Id = device_history.Device_info_Id
+		WHERE
+			device_info.User_info_employee_num = #{employee_num}
+		    AND DATE_FORMAT(Date, '%Y-%c-%d') = #{l_lf_date}
+		    AND type = 'certification'
+	</select>
+	
+	<insert id="l_unlock_log">
+		INSERT INTO device_history(Device_info_Id,type,history,Date)
+		VALUES ((SELECT Id FROM device_info WHERE User_info_employee_num = #{employee_num}), 'certification', 'es', NOW());
+	</insert>
+	
+	<update id="l_unlock_conf">
+		UPDATE device_management
+		SET certification='es'
+		WHERE Device_info_Id=(SELECT Id FROM device_info WHERE User_info_employee_num = #{employee_num});
+	</update>
+	
+	<select id="l_camera_auth" resultType="String">
+		SELECT history
+		FROM device_history
+		WHERE Device_info_Id=(SELECT Id FROM device_info WHERE User_info_employee_num = #{employee_num}) AND type = 'camera_auth'
+		ORDER BY idDevice_history DESC LIMIT 1;
+	</select>
+	
+	<select id="l_request_list" resultType="L_mgt_lr_list_VO">
+		SELECT idUser_history AS bno, employee_num, department, rank, name, date, history
+		FROM user_history
+		INNER JOIN user_info ON user_history.User_info_employee_num=user_info.employee_num
+		WHERE type='분실신고'
+		ORDER BY idUser_history DESC LIMIT #{pageStart},#{perPageNum};
+	</select>
+	
+	<select id="l_request_count" resultType="int">
+		SELECT COUNT(idUser_history)
+		FROM user_history
+		INNER JOIN user_info ON user_history.User_info_employee_num=user_info.employee_num
+		WHERE type='분실신고'
+	</select>
+	
+	<select id="l_request_list_search" resultType="L_mgt_lr_list_VO">
+		SELECT idUser_history AS bno, employee_num, department, rank, name, date, history
+		FROM user_history
+		INNER JOIN user_info ON user_history.User_info_employee_num=user_info.employee_num
+		WHERE type='분실신고'
+		<if test='vo.employee_num !=""'>
+			AND employee_num = #{vo.employee_num}
+		</if>
+		<if test='vo.department !="선택"'>
+			AND department = #{vo.department}
+		</if>
+		<if test='vo.rank !="선택"'>
+			AND rank = #{vo.rank}
+		</if>
+		<if test='vo.name !=""'>
+			AND name = #{vo.name}
+		</if>
+		<if test='vo.date !=""'>
+			AND date like #{vo.date}
+		</if>
+		ORDER BY idUser_history DESC LIMIT #{cri.pageStart},#{cri.perPageNum};
+	</select>
+	
+	<select id="l_request_search_count" resultType="int">
+		SELECT COUNT(idUser_history)
+		FROM user_history
+		INNER JOIN user_info ON user_history.User_info_employee_num=user_info.employee_num
+		WHERE type='분실신고'
+		<if test='vo.employee_num !=""'>
+			AND employee_num = #{vo.employee_num}
+		</if>
+		<if test='vo.department !="선택"'>
+			AND department = #{vo.department}
+		</if>
+		<if test='vo.rank !="선택"'>
+			AND rank = #{vo.rank}
+		</if>
+		<if test='vo.name !=""'>
+			AND name = #{vo.name}
+		</if>
+		<if test='vo.date !=""'>
+			AND date like #{vo.date}
+		</if>
+	</select>
+	
+	<delete id="l_loss_check">
+		UPDATE user_history
+		SET type='분실신고-완료'
+		WHERE idUser_history=#{bno};
+	</delete>
 </mapper>
