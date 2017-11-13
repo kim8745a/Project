@@ -145,7 +145,7 @@
 	            				<tr>
 	              					<td width="100" style="word-wrap:break-word;word-break:break-all;">${app.name}</td>
 	              					<td width="110" style="word-wrap:break-word;word-break:break-all;">${app.size}</td>
-	              					<td width="110" style="word-wrap:break-word;word-break:break-all;">${app.name}</td>
+	              					<td width="110" style="word-wrap:break-word;word-break:break-all;">${app.modulate}</td>
 	              					<td width="100" style="word-wrap:break-word;word-break:break-all;">${app.version}</td>
 	              				</tr>
               				</c:forEach>

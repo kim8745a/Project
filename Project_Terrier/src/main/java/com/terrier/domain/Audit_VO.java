@@ -8,6 +8,11 @@ public class Audit_VO {
 	private String admin_Id;
 	private String behavior;
 	private Timestamp date;
+	
+	// ÇÊÅÍ¿ë
+	private String condition;
+	private String value;
+	
 	public int getIdadmin_audit() {
 		return idadmin_audit;
 	}
@@ -37,6 +42,18 @@ public class Audit_VO {
 	}
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+	public String getCondition() {
+		return condition;
+	}
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
 	}
 	
 }

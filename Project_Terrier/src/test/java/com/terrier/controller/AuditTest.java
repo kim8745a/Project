@@ -1,7 +1,9 @@
 package com.terrier.controller;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.terrier.domain.Audit_VO;
 import com.terrier.domain.Criteria;
+import com.terrier.domain.PageMaker;
 import com.terrier.service.Audit_Service;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,6 +26,7 @@ public class AuditTest {
 	
 	@Test
 	public void test() throws Exception {
+	
 		List<Audit_VO> vo;
 		vo = service.audit_list();
 		

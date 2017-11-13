@@ -37,4 +37,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	<!-- 필터 -->
+	<select id="listSearchCriteria" resultType="com.terrier.domain.Audit_VO">
+		SELECT * FROM admin_audit
+		WHERE idadmin_audit > 0 
+			<choose>
+				<when test='auditVO.condition == "Ipaddress"'>
+					AND Ipaddress = #{auditVO.value}
+				</when>
+				<when test='auditVO.condition == "admin_Id"'>
+					AND Admin_Id = #{auditVO.value}
+				</when>
+				<when test='auditVO.condition == "behavior"'>
+					AND behavior = #{auditVO.value}
+				</when>
+			</choose>
+		ORDER BY idadmin_audit desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="countSearchPaging" resultType="int">
+		SELECT count(idadmin_audit) as count FROM admin_audit
+		WHERE idadmin_audit > 0 
+			<choose>
+				<when test='auditVO.condition == "Ipaddress"'>
+					AND Ipaddress = #{auditVO.value}
+				</when>
+				<when test='auditVO.condition == "admin_Id"'>
+					AND Admin_Id = #{auditVO.value}
+				</when>
+				<when test='auditVO.condition == "behavior"'>
+					AND behavior = #{auditVO.value}
+				</when>
+			</choose>
+	</select>
+	
 </mapper>

@@ -1,6 +1,8 @@
 package com.terrier.persistence;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -44,6 +46,18 @@ public class Audit_DAOimpl implements Audit_DAO{
 	@Override
 	public int countPaging(Criteria cri) throws Exception {
 		return sqlSession.selectOne(namespace+".countPaging", cri);
+	}
+
+	// map에는 criteria와 Audit_Vo가 담겨있음
+	@Override
+	public List<Audit_VO> listSearchCriteria(Map<String, Object> map) throws Exception {
+		return sqlSession.selectList(namespace+".listSearchCriteria", map);
+	}
+
+	// map에는 criteria와 Audit_Vo가 담겨있음
+	@Override
+	public int countSearchPaging(Map<String, Object> map) throws Exception {
+		return sqlSession.selectOne(namespace+".countSearchPaging", map);
 	}
 
 

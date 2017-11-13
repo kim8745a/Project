@@ -2,9 +2,10 @@ package com.terrier.domain;
 
 public class C_mgt_AppList_VO 
 {
-	private String name;//어플이름
-	private String size;//사이즈
-	private String version;//버전
+	private String name; // 어플이름
+	private String size; // 사이즈
+	private String version; // 버전
+	private String modulate; // 변조여부
 	public String getName() {
 		return name;
 	}
@@ -23,10 +24,15 @@ public class C_mgt_AppList_VO
 	public void setVersion(String version) {
 		this.version = version;
 	}
+	public String getModulate() {
+		return modulate;
+	}
+	public void setModulate(String modulate) {
+		this.modulate = modulate;
+	}
 	@Override
 	public String toString() {
 		return "C_mgt_AppList_VO [name=" + name + ", size=" + size + ", version=" + version + "]";
 	}
-	
 	
 }

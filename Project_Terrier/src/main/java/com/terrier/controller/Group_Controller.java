@@ -80,7 +80,7 @@ public class Group_Controller {
 	}
 	
 	@RequestMapping("group_management/in_group_emp")
-	public String group_in_group_emp(G_Owner_VO vo,Model model) throws Exception//그룹에 포함되어있는 인원뽑기
+	public String group_in_group_emp(G_Owner_VO vo, Model model) throws Exception//그룹에 포함되어있는 인원뽑기
 	{
 		List<Employee_VO> list;
 		list = g_mgt_service.emp_list(vo);

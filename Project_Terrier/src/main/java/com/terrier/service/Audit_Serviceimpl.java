@@ -1,6 +1,8 @@
 package com.terrier.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -39,6 +41,16 @@ public class Audit_Serviceimpl implements Audit_Service{
 	@Override
 	public int countPaging(Criteria cri) throws Exception {
 		return audit_DAO.countPaging(cri);
+	}
+
+	@Override
+	public List<Audit_VO> listSearchCriteria(Map<String, Object> map) throws Exception {		
+		return audit_DAO.listSearchCriteria(map);
+	}
+
+	@Override
+	public int countSearchPaging(Map<String, Object> map) throws Exception {		
+		return audit_DAO.countSearchPaging(map);
 	}
 
 }

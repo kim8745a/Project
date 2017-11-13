@@ -27,23 +27,26 @@
 	<div id="title">
 		<span class="glyphicon glyphicon-bullhorn"></span>&nbsp;&nbsp;계정 감사
 	</div>
-		
+	
+	<form id="auditform" action="/terrier/account_management/audit_list/search" method="get">
+	
 	<div class="col-md-6" style="float: right; padding:0px 0px 10px 0px;">
 		<div class="col-md-3" style="padding-right: 0">
-			<select class="form-control" name="department">
-				<option>IP</option>
-				<option>계정</option>
-				<option>기록</option>
-				<option>날짜</option>			
+			<select class="form-control" name="condition">
+				<option value="Ipaddress">IP</option>
+				<option value="admin_Id">계정</option>
+				<option value="behavior">기록</option>
 			</select>
 		</div>
 		<div class="col-md-7" style="padding-right: 0">
-			<input type="text" class="form-control">
+			<input type="text" class="form-control" name="value">
 		</div>
 		<div class="col-md-2" style="padding-right: 0">
-			<a class="btn icon-btn btn-muted apply_butt" href="#"><span class="glyphicon glyphicon-search"></span> 검색</a>
+			<a class="btn icon-btn btn-muted apply_butt" href="#" id="search"><span class="glyphicon glyphicon-search"></span> 검색</a>
 		</div>
 	</div>
+	
+	</form>
 	
 	<fmt:formatDate pattern="yyyy-MM-dd" value="${time}" var="nowtime"/>
 
@@ -115,5 +118,11 @@ else if(r_ok=="NO")
 	{
 		alert("작성자가 다릅니다");
 	}
-
+	
+	$("#search").click(function(e){
+		$("#auditform").submit();
+		e.preventDefault();
+	});
+	
+	
 </script>

@@ -32,7 +32,7 @@ public class Group_Data_Controller {
 		String id = request.getSession().getAttribute("id").toString();
 		G_Owner_VO vo = new G_Owner_VO();
 		vo.setGroup_name(group_name);
-		vo.setId(id);		
+		vo.setId(id);
 		return String.valueOf(g_mgt_service.group_check(vo));
 	}
 	@RequestMapping("group_management/group_Delete")
