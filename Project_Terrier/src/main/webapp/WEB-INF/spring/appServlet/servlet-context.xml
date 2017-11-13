@@ -38,29 +38,16 @@
 		<websocket:handlers>
         <websocket:mapping path="/terrier/device_management/" handler="d_mgt_Handler"/>
         <websocket:mapping path="/terrier/c_mgt/" handler="c_mgt_Handler"/>
+        <websocket:mapping path="/terrier/l_mgt/" handler="l_mgt_Handler"/>
     </websocket:handlers>
     <beans:bean id="d_mgt_Handler" class="com.terrier.websocket.D_mgt_socketHandler"/>
     <beans:bean id="c_mgt_Handler" class="com.terrier.websocket.C_mgt_socketHandler"/>
+    <beans:bean id="l_mgt_Handler" class="com.terrier.websocket.L_mgt_socketHandler"/>
     <!--
     	@Inject는 Type에 따라서 만들어 진다.
     	만약 똑같은 Type의 두개의 bean을 쓸 경우 각 bean에 이름을 달아서 사용할 수 있다. 
     	<beans:qualifier value="D_mgt_socketHandler"></beans:qualifier>
     -->
-
-	<!-- Session interceptor bean등록-->
-	<beans:bean id="SessionInterceptor" class="com.terrier.interceptor.Session_Interceptor">
-	</beans:bean>
-	<!--interceptor 맵핑 등록-->
-		<interceptors>
-			<interceptor>
-				<mapping path="/terrier/*"/><!--모든 페이지에서 항상 세션검사해야되-->
-				<mapping path="/terrier/*/*"/>
-				<mapping path="/terrier/*/*/*"/>
-				<beans:ref bean="SessionInterceptor"/>
-			</interceptor>
-		</interceptors>	
-			
-	
 		
 	<!--tiles3기본Main템플릿-->
 	<beans:bean id="tilesviewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
@@ -72,5 +59,29 @@
 			</beans:property>						
 	</beans:bean>	
 
-	<context:component-scan base-package="com.terrier.controller" />
+	<!-- Controller만 자동  스캔 -->
+	<context:component-scan base-package="com.terrier.controller" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	
+	<!-- Audit interceptor bean등록-->
+	<beans:bean id="AuditInterceptor" class="com.terrier.interceptor.Audit_Interceptor">
+	</beans:bean>
+	<!--interceptor 맵핑 등록-->
+		<interceptors>
+			<interceptor>
+				<mapping path="/terrier/*"/><!--모든 페이지에서 항상 감사 실행-->
+				<mapping path="/terrier/*/*"/>
+				<mapping path="/terrier/*/*/*"/>
+				<beans:ref bean="AuditInterceptor"/>
+			</interceptor>
+		</interceptors>
+		
+	<!-- AOP 설정 -->
+	<!-- <aop:aspectj-autoproxy/>  -->
+	
+	<!-- AOP 객체 생성 -->
+	<!-- <beans:bean id="AuditAspect" class="com.terrier.logging.AuditAspect" />  -->
+	
 </beans:beans>

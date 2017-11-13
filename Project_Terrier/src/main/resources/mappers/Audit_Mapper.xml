@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Audit_Mapper">
+
+	<!-- 감사 리스트 검색 -->
+	<select id="audit_list" resultType="Audit_VO">
+		SELECT * FROM admin_audit;
+	</select>
+	
+	<!-- 감사 기록 저장 -->
+	
+	<insert id="audit_insert">
+		INSERT INTO admin_audit(Ipaddress, admin_Id, behavior)
+		VALUES(#{Ipaddress},#{admin_Id},#{behavior})
+	</insert>
+	
+	<!-- 감사 기록 페이징 -->
+	
+	<select id="listPage" resultType="com.terrier.domain.Audit_VO">
+		<![CDATA[
+			select * from admin_audit where idadmin_audit > 0 order by bno desc limit #{page},10
+		]]>						
+	</select>
+	
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+			select count(idadmin_audit) as count from admin_audit;
+		]]>
+	</select>
+	
+	<select id="listCriteria" resultType="com.terrier.domain.Audit_VO">
+		<![CDATA[
+			select * from admin_audit where idadmin_audit > 0 order by idadmin_audit desc limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	
+	<!-- 필터 -->
+	<select id="listSearchCriteria" resultType="com.terrier.domain.Audit_VO">
+		SELECT * FROM admin_audit
+		WHERE idadmin_audit > 0 
+			<choose>
+				<when test='auditVO.condition == "Ipaddress"'>
+					AND Ipaddress = #{auditVO.value}
+				</when>
+				<when test='auditVO.condition == "admin_Id"'>
+					AND Admin_Id = #{auditVO.value}
+				</when>
+				<when test='auditVO.condition == "behavior"'>
+					AND behavior = #{auditVO.value}
+				</when>
+			</choose>
+		ORDER BY idadmin_audit desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="countSearchPaging" resultType="int">
+		SELECT count(idadmin_audit) as count FROM admin_audit
+		WHERE idadmin_audit > 0 
+			<choose>
+				<when test='auditVO.condition == "Ipaddress"'>
+					AND Ipaddress = #{auditVO.value}
+				</when>
+				<when test='auditVO.condition == "admin_Id"'>
+					AND Admin_Id = #{auditVO.value}
+				</when>
+				<when test='auditVO.condition == "behavior"'>
+					AND behavior = #{auditVO.value}
+				</when>
+			</choose>
+	</select>
+	
+</mapper>

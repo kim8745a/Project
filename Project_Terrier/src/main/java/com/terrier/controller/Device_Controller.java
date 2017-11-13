@@ -3,6 +3,7 @@ package com.terrier.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.terrier.domain.Audit_VO;
 import com.terrier.domain.C_mgt_AppList_VO;
 import com.terrier.domain.C_mgt_AppLog_VO;
 import com.terrier.domain.C_mgt_Gps_VO;
@@ -17,6 +19,7 @@ import com.terrier.domain.C_mgt_controller_VO;
 import com.terrier.domain.C_mgt_userinfo_VO;
 import com.terrier.domain.Employee_VO;
 import com.terrier.domain.Location_emp_num_VO;
+import com.terrier.service.Audit_Service;
 import com.terrier.service.D_mgt_Service;
 import com.terrier.service.GpsToAddress;
 
@@ -29,16 +32,19 @@ public class Device_Controller {
 	@Inject
 	GpsToAddress gps;
 	
+	@Inject
+	Audit_Service service;
+	
 	@RequestMapping(value="device_management/d_mgt",method=RequestMethod.GET)
-	public String d_mgtGET(Model model) throws Exception 
-	{
+	public String d_mgtGET(Model model, HttpServletRequest request) throws Exception 
+	{	
 		model.addAttribute("list",d_mgt_service.emp_list());
 		return "terrier/device_management/d_mgt";
 	}
 	
 	@RequestMapping(value="device_management/d_mgt_search",method=RequestMethod.GET)
-	public String d_mgt_search(Employee_VO vo,Model model) throws Exception//검색 버튼 속성
-	{
+	public String d_mgt_search(Employee_VO vo,Model model, HttpServletRequest request) throws Exception//검색 버튼 속성
+	{	
 		//vo에는 선택된 값들이 모두 바인딩될것임.
 		model.addAttribute("vo",vo);
 		List<Employee_VO> list; 
@@ -48,7 +54,7 @@ public class Device_Controller {
 	}
 	
 	@RequestMapping(value="device_management/c_mgt",method=RequestMethod.GET)
-	public void c_mgtGET(@RequestParam("e_num") String e_num,Model model)throws Exception//ON,OFF버튼 눌렀을때 [팝업창]사원당 1개씩
+	public void c_mgtGET(@RequestParam("e_num") String e_num,Model model, HttpServletRequest request)throws Exception//ON,OFF버튼 눌렀을때 [팝업창]사원당 1개씩
 	{
 		model.addAttribute("curr_location",gps.getGps_Adress(e_num,0)); // 위도,경도,주소
 		model.addAttribute("pre_location",gps.getGps_Adress(e_num,1));
@@ -61,5 +67,6 @@ public class Device_Controller {
 		model.addAttribute("info",user);//사용자 정보 넘겨주기.
 		C_mgt_controller_VO con=d_mgt_service.controller(e_num);
 		model.addAttribute("con",con);//제어 정보 넘겨주기
+		model.addAttribute("conlog", d_mgt_service.controllog(e_num)); // 제어 로그 넘겨주기
 	}
 }

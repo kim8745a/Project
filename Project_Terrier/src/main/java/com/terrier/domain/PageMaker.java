@@ -49,7 +49,6 @@ public class PageMaker {
 		//page=10&perPageNum=10
 		
 		return uriComponents.toUriString();
-		
 	}
 	
 	

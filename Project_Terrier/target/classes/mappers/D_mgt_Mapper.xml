@@ -14,14 +14,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<!-- 수정예정 -->
+	<!-- 단말&사원 리스트 검색 필터 -->
 	<select id="emp_search_list" resultType="Employee_VO">
+	
 	select user_info.employee_num, user_info.Department as department, user_info.Rank as rank,
 	user_info.Name as name,device_info.Telnum as phone,device_management.Active as active
 	FROM user_info
 	inner join device_info on user_info.employee_num=device_info.User_info_employee_num
 	inner join device_management on device_info.Id=device_management.Device_info_Id
-	WHERE department !='test'
+	WHERE department !='empty'
 		<if test='employee_num !=""'>
 			AND employee_num = #{employee_num}
 		</if>
@@ -39,7 +40,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<if test='name !=""'>
 			AND name = #{name}
-		</if> 		
+		</if>
+	  		
 	</select>
 	
 	<select id="user_info" resultType="C_mgt_userinfo_VO">
@@ -62,11 +64,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="user_applist" resultType="C_mgt_AppList_VO">
-		select application_info.name AS name,application_info.size AS size,application_info.version AS version
-		from application_info
-		inner join device_info on device_info.Id=application_info.Device_info_Id
-		inner join user_info on user_info.employee_num=device_info.User_info_employee_num
-		where user_info.employee_num=#{emp_num};
+		SELECT ai.name, size_calc(ai.size) as size, am.modulate, ai.version
+			FROM application_info ai
+		LEFT OUTER JOIN app_mod am
+			ON ai.Device_info_Id = am.Device_info_Id 
+			AND ai.packagename = am.packagename
+		INNER JOIN device_info di
+			ON ai.Device_info_Id = di.Id
+			WHERE di.User_info_employee_num = #{emp_num};
 	</select>
 	
 	<select id="user_applog" resultType="C_mgt_AppLog_VO">
@@ -89,5 +94,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       			LIMIT 1,1;
     		</otherwise>
   		</choose>
+	</select>
+	
+	<select id="user_conlog" resultType="C_mgt_ControlLog_VO">
+		SELECT history, type, Date as date_Time 
+		FROM control_history c
+		INNER JOIN device_info d
+		ON c.Device_info_Id = d.Id
+		WHERE d.User_info_employee_num = #{e_num}
 	</select>
 </mapper>

@@ -3,6 +3,7 @@ package com.terrier.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.terrier.domain.Audit_VO;
 import com.terrier.domain.Employee_VO;
 import com.terrier.domain.G_Owner_VO;
 import com.terrier.domain.G_mgt_log_VO;
 import com.terrier.domain.GroupList_VO;
 import com.terrier.domain.User_VO;
+import com.terrier.service.Audit_Service;
 import com.terrier.service.G_mgt_Service;
 
 //그룹관리 view컨트롤 전용
@@ -23,12 +26,14 @@ import com.terrier.service.G_mgt_Service;
 public class Group_Controller {
 	@Inject
 	G_mgt_Service g_mgt_service;
+	@Inject
+	Audit_Service service;
 	
 	@RequestMapping(value="group_management/g_mgt",method=RequestMethod.GET) //그룹관리-그룹관리 
-	public void g_mgtGET(Model model,HttpSession session) throws Exception
+	public void g_mgtGET(Model model, HttpServletRequest request) throws Exception
 	{
-		User_VO user_vo = (User_VO)session.getAttribute("user_info");//접속한사람의 ID가 오너id가 저장될것.
-		String id = user_vo.getId();
+		// 스프링 시큐리티 사용으로 HttpSession -> request.getSession으로 변경.
+		String id = request.getSession().getAttribute("id").toString();//접속한사람의 ID가 오너id가 저장될것.
 		List<GroupList_VO> grouplist_vo;
 		grouplist_vo = g_mgt_service.group_list(id);
 		model.addAttribute("list", grouplist_vo);
@@ -48,10 +53,10 @@ public class Group_Controller {
 	
 	
 	@RequestMapping(value="group_management/g_Create",method=RequestMethod.GET)
-	public void g_Create(Model model,HttpSession session) throws Exception
+	public void g_Create(Model model, HttpServletRequest request) throws Exception
 	{
-		User_VO user_vo = (User_VO)session.getAttribute("user_info");
-		String id = user_vo.getId();
+		// 스프링 시큐리티 사용으로 HttpSession -> request.getSession으로 변경.
+		String id = request.getSession().getAttribute("id").toString();
 		List<GroupList_VO> grouplist_vo;
 		grouplist_vo = g_mgt_service.group_list(id);
 		model.addAttribute("list", grouplist_vo);
@@ -75,7 +80,7 @@ public class Group_Controller {
 	}
 	
 	@RequestMapping("group_management/in_group_emp")
-	public String group_in_group_emp(G_Owner_VO vo,Model model) throws Exception//그룹에 포함되어있는 인원뽑기
+	public String group_in_group_emp(G_Owner_VO vo, Model model) throws Exception//그룹에 포함되어있는 인원뽑기
 	{
 		List<Employee_VO> list;
 		list = g_mgt_service.emp_list(vo);

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.terrier.domain.C_mgt_AppList_VO;
 import com.terrier.domain.C_mgt_AppLog_VO;
+import com.terrier.domain.C_mgt_ControlLog_VO;
 import com.terrier.domain.C_mgt_Gps_VO;
 import com.terrier.domain.C_mgt_controller_VO;
 import com.terrier.domain.C_mgt_userinfo_VO;
@@ -60,6 +61,11 @@ public class D_mgt_ServiceImpl implements D_mgt_Service {
 	public C_mgt_Gps_VO gps(Location_emp_num_VO vo) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.gps(vo);
+	}
+
+	@Override
+	public List<C_mgt_ControlLog_VO> controllog(String e_num) throws Exception {
+		return dao.controllog(e_num);
 	}
 
 }

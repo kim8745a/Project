@@ -50,7 +50,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[
 			select count(bno) from notice_board where bno>0
 		]]>
-		
 	</select>
 	
 	

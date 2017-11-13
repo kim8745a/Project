@@ -20,7 +20,7 @@
 <center>
 	<div class="middle">
       	<div id="login">
-        	<form action="/user/login" method="post">
+        	<form action="j_spring_security_check" method="post">
    
 	          	<fieldset class="clearfix">
 	           			<p>
@@ -35,7 +35,7 @@
 	            		 
 	          		<div>
 	             	 <span style="width:48%; text-align:left;  display: inline-block;">
-	              	 	<a class="small-text" href="#">Join Rquest</a></span>
+	              	 	<a class="small-text" href="#">Join Request</a></span>
 	             	 <span style="width:50%; text-align:right;  display: inline-block;">
 	            	  	<input type="submit" value="로그인"></span>
 	         		</div>

@@ -15,8 +15,7 @@ public class User_ServiceImpl implements User_Service {
 	private User_DAO dao;
 	
 	@Override
-	public User_VO login(User_DTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.login(dto);
+	public User_VO login(String username) {
+		return dao.login(username);
 	}
 }

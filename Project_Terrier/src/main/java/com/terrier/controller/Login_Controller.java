@@ -18,29 +18,26 @@ import com.terrier.service.User_Service;
 
 public class Login_Controller 
 {
-	@Inject
-	private User_Service service;
+//	@Inject
+//	private User_Service service;
 	
 	@RequestMapping(value="/login",method=RequestMethod.GET)//그냥 처음 접속했을때
 	public void loginGET()throws Exception
 	{
 		
 	}
-	@RequestMapping(value="/login",method=RequestMethod.POST)//로그인버튼눌렀을때
-	public String loginPOST(User_DTO dto,Model model,RedirectAttributes rttr ,HttpSession session)throws Exception
-	{
-		User_VO vo=service.login(dto);
-		if(vo==null)
-		{
-			return "redirect:/user/login";
-		}
-		session.setAttribute("user_info", vo);
-		rttr.addFlashAttribute("msg","SUCCESS");
-		return "redirect:/terrier/main";
-	}
 	
-
-
-	
-	
+//	@RequestMapping(value="/login",method=RequestMethod.POST)//로그인버튼눌렀을때
+//	public String loginPOST(User_DTO dto,Model model,RedirectAttributes rttr ,HttpSession session)throws Exception
+//	{
+//		User_VO vo=service.login(dto);
+//		if(vo==null)
+//		{
+//			return "redirect:/user/login";
+//		}
+//		session.setAttribute("user_info", vo);
+//		rttr.addFlashAttribute("msg","SUCCESS");
+//		return "redirect:/terrier/main";
+//	}
+		
 }
