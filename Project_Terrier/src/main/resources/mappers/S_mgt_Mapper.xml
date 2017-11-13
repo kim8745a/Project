@@ -74,7 +74,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where user_info.Department=#{dep} 
 			and left(control_history.Date,10)=#{date} 
 			and control_history.history=#{controller};	
-	
 	</select>
+	
+	<select id="emp_date_control_status_on_off" resultType="com.terrier.domain.Control_count_VO">
+	select 
+		Count(case when type='Wifi' then 1 end) as wifi,
+		Count(case when type='Bluetooth' then 1 end) as bluetooth,
+		Count(case when type='Tethering' then 1 end) as tethering,
+		Count(case when type='Camera' then 1 end) as camera,
+		Count(case when type='VoiceRecord' then 1 end) as voiceRecord 
+	from control_history
+		inner join device_info ON control_history.Device_info_Id=device_info.Id
+		inner join user_info ON device_info.User_info_employee_num=user_info.employee_num
+	where user_info.employee_num=#{emp} 
+			and left(control_history.Date,10)=#{date} 
+			and control_history.history=#{controller};
+	</select>
+	
+	<select id="fi_control_off" resultType="int">
+	select 
+		Count(case when type='Wifi' then 1 end)
+		+Count(case when type='Bluetooth' then 1 end)
+		+Count(case when type='Tethering' then 1 end)
+		+Count(case when type='Camera' then 1 end)
+		+Count(case when type='VoiceRecord' then 1 end)
+	from control_history
+		inner join device_info ON control_history.Device_info_Id=device_info.Id
+		inner join user_info ON device_info.User_info_employee_num=user_info.employee_num
+	where user_info.Department=#{dep}
+			and control_history.history=#{controller};
+	</select>
+	
+	
+	
 	
 </mapper>

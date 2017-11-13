@@ -12,6 +12,8 @@ import com.terrier.domain.Control_count_VO;
 import com.terrier.domain.Dep_ctl_status_VO;
 import com.terrier.domain.S_mgt_date_con_count_VO;
 import com.terrier.domain.S_mgt_dep_date_con_count_VO;
+import com.terrier.domain.S_mgt_emp_date_con_count_VO;
+import com.terrier.domain.S_mgt_fi_count_VO;
 
 @Repository
 public class S_mgt_DAOImpl implements S_mgt_DAO {
@@ -55,6 +57,20 @@ public class S_mgt_DAOImpl implements S_mgt_DAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".dep_date_control_status_on_off",vo);
 	}
+
+	@Override
+	public Control_count_VO emp_date_conunt(S_mgt_emp_date_con_count_VO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".emp_date_control_status_on_off",vo);
+	}
+
+	@Override
+	public int fi_total(S_mgt_fi_count_VO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".fi_control_off",vo);
+	}
+
+
 
 
 }
